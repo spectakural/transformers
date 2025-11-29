@@ -53,3 +53,24 @@ class PositionalEncoding(nn.Module):
         return x + (self.pe[:, :x.size(1), :]).requires_grad_(False)  # add positional encoding to input embeddings
         # whether to apply dropout?
 
+class LayerNormalization(nn.Module):
+    """
+    Implements the Layer Normalization Paper (https://arxiv.org/pdf/1607.06450)
+    formula 
+        xj_hat = (xj - mean_j)/sqrt(std_j^2 + eps)
+        
+    """
+    def __init__(self, eps: float = 10e-6):
+        super().__init__()
+        self.alpha = nn.Parameter(torch.ones(1))
+        self.bias = nn.Parameter(torch.zeros(1))
+        
+        self.register_buffer("eps", eps)
+        
+    def forward(self, x):
+        mean = torch.mean(input=x, dim=-1, keepdim=True)
+        std = torch.std(input=x, dim=-1, keepdim=True)
+        return (x - mean)/torch.sqrt(std + self.eps)*self.alpha + self.bias
+        # no need of sqrt??
+    
+    
