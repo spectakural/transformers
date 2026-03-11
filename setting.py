@@ -6,5 +6,6 @@ class GPTConfig(BaseModel):
     emb_dim: int = 768
     n_heads: int = 22
     n_layers: int = 12
+    ffn_depth_factor: int = 4 
     drop_rate: float = 0.1
     qkv_bias: bool = False

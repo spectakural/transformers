@@ -36,7 +36,7 @@ class DummyTransformerBlock(nn.Module):
     
     def forward(self, x):
         return x
-        
+    
         
 class DummyLayerNorm(nn.Module):
     def __init__(self, normalized_shape, eps=1e-5):
