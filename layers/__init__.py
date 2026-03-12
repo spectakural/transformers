@@ -4,3 +4,4 @@ from .GELU import GELU
 from .FeedForwardLayer import FeedForwardLayer
 from .LayerNorm import LayerNorm
 from .SelfAttention import CausalAttention
+from .TransformerBlock import TransformerBlock
