@@ -1,4 +1,3 @@
-import torch
 import torch.nn as nn
 from setting import GPTConfig
 from .GELU import GELU

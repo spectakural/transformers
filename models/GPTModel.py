@@ -3,7 +3,7 @@ import torch.nn as nn
 
 from setting import GPTConfig
 
-from transformers.layers import (
+from layers import (
     TransformerBlock,
     LayerNorm
 )

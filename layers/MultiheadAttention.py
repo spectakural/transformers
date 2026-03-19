@@ -45,10 +45,13 @@ class MultiheadAttention(nn.Module):
             masked_attn_scores / keys.shape[-1] ** 0.5,
             dim = -1
         )
+        masked_attn_weights = self.dropout(masked_attn_weights)
         
         # Projecting the attention score on the value vector to produce context vector
         context_vec = masked_attn_weights @ values
         context_vec.transpose_(1,2)
+        context_vec = context_vec.contiguous().view(bs, num_tokens, self.d_out)
+        
         
         # Project the output using out_proj
         context_vec = self.out_proj(context_vec)

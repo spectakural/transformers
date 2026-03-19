@@ -9,3 +9,13 @@ class GPTConfig(BaseModel):
     ffn_depth_factor: int = 4 
     drop_rate: float = 0.1
     qkv_bias: bool = False
+    
+class GPT_124M_CONFIG:
+    vocab_size: int = 50257
+    context_length: int = 1024
+    emb_dim: int = 768
+    n_heads: int = 12
+    n_layers: int = 12
+    ffn_depth_factor: int = 4 
+    drop_rate: float = 0.1
+    qkv_bias: bool = False

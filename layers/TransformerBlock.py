@@ -1,12 +1,10 @@
-import torch
 import torch.nn as nn
 
-from transformers.setting import GPTConfig
-from transformers.layers import (
+from setting import GPTConfig
+from layers import (
     FeedForwardLayer,
     MultiheadAttention,
-    LayerNorm,
-    GELU
+    LayerNorm
 )
 
 class TransformerBlock(nn.Module):
