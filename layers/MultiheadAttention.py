@@ -35,10 +35,10 @@ class MultiheadAttention(nn.Module):
         attn_scores = queries @ keys.transpose(2,3)
         
         # truncating the mask to the size of current sequence
-        self.mask = self.mask[:num_tokens, :num_tokens]
+        mask_bool = self.mask.bool()[:num_tokens, :num_tokens]
         
         # Using the causal mask on the attention scores
-        masked_attn_scores = attn_scores.masked_fill(self.mask.bool(), -torch.inf)
+        masked_attn_scores = attn_scores.masked_fill(mask_bool, -torch.inf)
         
         # Applying softmax on attention scores to produce attention weights
         masked_attn_weights = torch.softmax(
