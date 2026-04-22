@@ -34,17 +34,18 @@ print(f"Total size of the model: {total_size_mb:.2f} MB")
 
 # Sample inference with generate_text_simple fn
 from utils.generate_text import generate_text_simple
+from utils.tokenization import text_to_token_ids, token_ids_to_text
 
-start_context = "Hello, I am"
-encoded = tokenizer.encode(start_context)
-print(f"\n\nEncoded Start Context: {encoded}")
-encoded_tensor = torch.tensor(encoded).unsqueeze(0)
-print(f"encoded_tensor shape: {encoded_tensor.shape}")
+start_context = "Every effort moves you"
+# encoded = tokenizer.encode(start_context)
+# print(f"\n\nEncoded Start Context: {encoded}")
+# encoded_tensor = torch.tensor(encoded).unsqueeze(0)
+# print(f"encoded_tensor shape: {encoded_tensor.shape}")
 
 model.eval()
 out = generate_text_simple(
     model=model,
-    idx=encoded_tensor,
+    idx=text_to_token_ids(start_context, tokenizer),
     max_new_tokens=6,
     context_size=GPT_124M_CONFIG.context_length
 )
@@ -52,5 +53,5 @@ print(f"\nOutput: {out}")
 print(f"Output length: {len(out[0])}")
 
 # decoding the text
-decoded_text = tokenizer.decode(out.squeeze(0).tolist())
-print(f"Decoded response: {decoded_text}")
+# decoded_text = tokenizer.decode(out.squeeze(0).tolist())
+print(f"Decoded response: {token_ids_to_text(out, tokenizer)}")
